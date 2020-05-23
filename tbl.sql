@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS tasks (
     start_date DATE,
     due_date DATE,
     status TINYINT NOT NULL,
-    priority TINYINT NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )  ENGINE=INNODB;
