@@ -1,0 +1,82 @@
+pipeline{
+    agent{
+        node{
+            label 'Docker'
+		}
+    }
+    stages{
+        stage("Update Container"){
+            steps{
+                echo "========executing A========"
+//                  sh 'docker container exec mydb apt-get update'
+//                  sh 'kubectl exec mysql apt-get update'
+                    sh 'docker compose -f /opt/wavenet_projects/saas_crs/stream_process/compose/mysql.yml'
+            }
+            post{
+                always{
+                    echo "========always========"
+                }
+                success{
+                    echo "========A executed successfully========"
+                }
+                failure{
+                    echo "========A execution failed========"
+                }
+            }
+        }
+
+//        stage("Install WGET Software"){
+//            steps{
+//                echo "========executing A========"
+//                sh 'docker container exec mydb apt-get install wget -y'
+//            }
+//            post{
+//                always{
+//                    echo "========always========"
+//                }
+//                success{
+//                    echo "========A executed successfully========"
+//                }
+//                failure{
+//                    echo "========A execution failed========"
+//                }
+//            }
+//        }
+//
+//        stage("Download Mysql DB create script"){
+//            steps{
+//                echo "========executing A========"
+//                sh 'docker container exec mydb wget https://raw.githubusercontent.com/pcjayasinghe/mysql-scripts/master/demo-test.sql'
+//                sh 'docker container exec mydb mv demo-test.sql /opt/'
+//            }
+//            post{
+//                always{
+//                    echo "========always========"
+//                }
+//                success{
+//                    echo "========A executed successfully========"
+//                }
+//                failure{
+//                    echo "========A execution failed========"
+//                }
+//            }
+//        }
+//        stage("Create table"){
+//            steps{
+//                echo "========executing A========"
+//            //    sh 'docker container exec mydb mysql -u root --password=Omnibis.123 test < /opt/demo-test.sql'
+//                sh "docker container exec mydb sh -c 'exec mysql -pOmnibis.123 test < /opt/demo-test.sql'"
+//            }
+//            post{
+//                always{
+//                    echo "========always========"
+//                }
+//                success{
+//                    echo "========A executed successfully========"
+//                }
+//                failure{
+//                    echo "========A execution failed========"
+//                }
+//            }
+        }
+}
